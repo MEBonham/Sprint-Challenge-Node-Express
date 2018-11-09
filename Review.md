@@ -28,4 +28,4 @@ With Routing?
 
 ## What is express.json() and why do we need it?
 
-It's a piece of built-in middleware that lets Express know how to convert JSON-format data into JavaScript objects.
+It's a piece of built-in middleware that lets Express know how to convert JavaScript objects to JSON-format data.
