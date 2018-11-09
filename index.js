@@ -156,7 +156,6 @@ server.put("/api/actions/:id", (req, res) => {
                 completed: oldAction.completed,
                 ...modAction
             };
-            // console.log("test flag", modProject);
             dbAction.update(req.params.id, modAction)
                 .then(action => {
                     res.status(200).json(action);
@@ -167,6 +166,16 @@ server.put("/api/actions/:id", (req, res) => {
         })
         .catch(err => {
             res.status(404).json({ error: "The action with that ID does not exist." });
+        });
+});
+
+server.get("/api/projects/:id/actions", (req, res) => {
+    dbProject.getProjectActions(req.params.id)
+        .then(list => {
+            res.status(200).json(list);
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Could not retrieve actions for that project." });
         });
 });
 
