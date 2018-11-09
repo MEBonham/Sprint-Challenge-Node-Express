@@ -55,13 +55,13 @@ server.get("/api/actions/:id", (req, res) => {
 server.post("/api/projects", (req, res) => {
     console.log(req.body);
     let projData = req.body;
-    if (!projData.name || !projData.description) {
-        res.status(400).json({ error: "Please provide a name and description." });
-    } else {
-        projData = {
-            completed: false,
-            ...projData
-        };
+    // if (!projData.name || !projData.description) {
+    //     res.status(400).json({ error: "Please provide a name and description." });
+    // } else {
+    //     projData = {
+    //         completed: false,
+    //         ...projData
+    //     };
         dbProject.insert(projData)
             .then(project => {
                 res.status(200).json(project);
@@ -69,7 +69,7 @@ server.post("/api/projects", (req, res) => {
             .catch(err => {
                 res.status(500).json({ error: "The Project could not be added." });
             });
-    }
+    // }
 });
 
 server.listen(port, () => console.log(`API running on port ${port}`));
