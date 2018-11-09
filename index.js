@@ -58,6 +58,8 @@ server.post("/api/projects", (req, res) => {
     const projData = req.body;
     if (!projData.name || !projData.description) {
         res.status(400).json({ error: "Please provide a name and description." });
+    } else if (projData.name.length > 128) {
+        res.status(400).json({ error: "Name is limited to 128 characters." });
     } else {
         newProject = {
             completed: false,
