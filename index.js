@@ -53,6 +53,7 @@ server.get("/api/actions/:id", (req, res) => {
 });
 
 server.post("/api/projects", (req, res) => {
+    console.log(req.body);
     let projData = req.body;
     if (!projData.name || !projData.description) {
         res.status(400).json({ error: "Please provide a name and description." });
@@ -62,8 +63,12 @@ server.post("/api/projects", (req, res) => {
             ...projData
         };
         dbProject.insert(projData)
-            .then()
-            .catch();
+            .then(project => {
+                res.status(200).json(project);
+            })
+            .catch(err => {
+                res.status(500).json({ error: "The Project could not be added." });
+            });
     }
 });
 
