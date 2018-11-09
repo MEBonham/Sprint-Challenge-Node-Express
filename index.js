@@ -94,4 +94,32 @@ server.post("/api/actions", (req, res) => {
     }
 });
 
+server.delete("/api/projects/:id", (req, res) => {
+    dbProject.remove(req.params.id)
+        .then(count => {
+            if (count) {
+                res.status(200).json({ message: `${count} project(s) deleted.` });
+            } else {
+                res.status(404).json({ error: "The project with that ID does not exist." });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ error: "The project could not be deleted." });
+        });
+});
+
+server.delete("/api/actions/:id", (req, res) => {
+    dbAction.remove(req.params.id)
+        .then(count => {
+            if (count) {
+                res.status(200).json({ message: `${count} action(s) deleted.` });
+            } else {
+                res.status(404).json({ error: "The action with that ID does not exist." });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ error: "The action could not be deleted." });
+        });
+});
+
 server.listen(port, () => console.log(`API running on port ${port}`));
