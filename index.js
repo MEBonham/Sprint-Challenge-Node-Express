@@ -132,7 +132,6 @@ server.put("/api/projects/:id", (req, res) => {
                 completed: oldProject.completed,
                 ...modProject
             };
-            console.log("test flag", modProject);
             dbProject.update(req.params.id, modProject)
                 .then(project => {
                     res.status(200).json(project);
@@ -143,6 +142,31 @@ server.put("/api/projects/:id", (req, res) => {
         })
         .catch(err => {
             res.status(404).json({ error: "The project with that ID does not exist." });
+        });
+});
+
+server.put("/api/actions/:id", (req, res) => {
+    let modAction = req.body;
+    dbAction.get(req.params.id)
+        .then(oldAction => {
+            modAction = {
+                project_id: oldAction.project_id,
+                description: oldAction.description,
+                notes: oldAction.notes,
+                completed: oldAction.completed,
+                ...modAction
+            };
+            // console.log("test flag", modProject);
+            dbAction.update(req.params.id, modAction)
+                .then(action => {
+                    res.status(200).json(action);
+                })
+                .catch(err => {
+                    res.status(500).json({ error: "The action could not be modified." });
+                });
+        })
+        .catch(err => {
+            res.status(404).json({ error: "The action with that ID does not exist." });
         });
 });
 
