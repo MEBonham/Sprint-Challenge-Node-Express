@@ -26,6 +26,7 @@ server.get("/api/projects", (req, res) => {
 server.get("/api/projects/:id", (req, res) => {
     dbProject.get(req.params.id)
         .then(project => {
+            console.log("touched");
             res.status(200).json(project);
         })
         .catch(err => {
@@ -50,7 +51,8 @@ server.get("/api/actions/:id", (req, res) => {
             res.status(200).json(action);
         })
         .catch(err => {
-            res.status(500).json({ error: "The Projects info could not be retrieved." });
+            console.log(err);
+            res.status(500).json({ error: "The Actions info could not be retrieved." });
         });
 });
 

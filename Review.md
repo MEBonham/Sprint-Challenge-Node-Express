@@ -18,6 +18,8 @@ A series of functions (in a certain order) that sequentially process data.
 
 ## What is a Resource?
 
+The targets of CRUD operations; database data.
+
 ## What can the API return to help clients know if a request was successful?
 
 You can make it return lots of things, but I think this question has in mind a status code.
